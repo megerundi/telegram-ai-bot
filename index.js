@@ -14,7 +14,8 @@ const bot = new Telegraf(process.env.TELEGRAM_API_TOKEN, {parse_mode: 'HTML'});
 
 bot.start(startCommand);
 bot.help(ctx => ctx.reply('Спасение утопающего, дело рук самого утопающего)'));
-bot.command('ask', askCommand)
+// bot.command('ask', askCommand)
+bot.on('text', askCommand)
 bot.command('commands', commandsCommands)
 bot.launch();
 
