@@ -14,18 +14,32 @@ class Database {
             this.users = this.db.collection('users');
             console.log('Database is connected successfully!');
         }catch(e){
-            console.log('Connecting error', e);
+            console.log('Database connecting error', e);
         }
     }
     async close(){
-        await this.client.close();
-        console.log('Database id disconnected');
+        try{
+            await this.client.close();
+            console.log('Database id disconnected');
+        }catch(e){
+            console.log('Database closing error', e);
+        }
+
     }
     async getUser(telegramId){
-        return await this.users.findOne({id: telegramId});
+        try{
+            return await this.users.findOne({id: telegramId})
+        }catch(e){
+            console.log(`An error occured while getting user: ${telegramId}`, e);
+        }
     }
     async addUser(user){
-        await this.db.collection('users').insertOne(user);
+        try{
+            await this.db.collection('users').insertOne(user);
+            console.log(`New user: ${user.id} has been added successfully`);
+        }catch(e){
+            console.log(`An error occured while adding user: ${telegramId}`, e);
+        }
     }
 }
 

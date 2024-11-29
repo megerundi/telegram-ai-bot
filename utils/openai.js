@@ -8,7 +8,7 @@ async function getOpenAIResponse(prompt){
         const completion = await openai.chat.completions.create({
             model: "gpt-4o",
             messages: [
-                { role: "assistant", content: "You are a helpful assistant." },
+                { role: "assistant", content: "You are a professional AI" },
                 {
                     role: "user",
                     content: prompt,
