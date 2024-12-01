@@ -26,7 +26,12 @@ bot.command('admin', adminCommand);
 bot.command('commands', commandsCommand);
 
 //HANDLING GPT PROMPT
-bot.on(message('text'), askCommand);
+bot.on(message('text'), ctx => {
+   if (ctx.message.text[0] === '/') return;
+
+   askCommand(ctx);
+   
+})
 bot.launch();
 process.once('SIGINT', () => bot.stop('SIGINT'))
 process.once('SIGTERM', () => bot.stop('SIGTERM'))
