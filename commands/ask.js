@@ -1,14 +1,14 @@
-const {getOpenAIResponse} = require('../utils/openai')
+import getOpenAIResponse from '../utils/openai.js';
 
-module.exports =  async (ctx) => {
+export default  async (ctx) => {
     try {
         const userMessage = ctx.message.text;
-        console.log(userMessage);
-        ctx.reply('⏳ Подождите, я обрабатываю ваш запрос...');
+        
+        await ctx.reply('⏳ Подождите, я обрабатываю ваш запрос...');
         const aiResponse = await getOpenAIResponse(userMessage);
-        ctx.reply(aiResponse);
+        await ctx.editMessageText(aiResponse);
     } catch (error) {
-        ctx.reply('Произошла ошибка при обработке вашего запроса. Пожалуйста, попробуйте позже.');
+        await ctx.reply('Произошла ошибка при обработке вашего запроса. Пожалуйста, попробуйте позже.');
         console.log(error);
     }
 };

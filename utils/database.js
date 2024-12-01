@@ -1,5 +1,6 @@
-const { MongoClient, ServerApiVersion } = require('mongodb');
-require('dotenv').config()
+import { MongoClient } from 'mongodb';
+import dotenv  from 'dotenv';
+dotenv.config();
 
 class Database {
     constructor(){
@@ -43,4 +44,4 @@ class Database {
     }
 }
 
-module.exports = new Database();
+export default new Database();

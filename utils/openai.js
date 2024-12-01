@@ -1,5 +1,5 @@
-const { OpenAI } = require('openai');
-require('dotenv').config();
+import { OpenAI } from 'openai';
+
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
@@ -22,4 +22,4 @@ async function getOpenAIResponse(prompt){
     }
 }
 
-module.exports = {getOpenAIResponse};
+export default getOpenAIResponse;

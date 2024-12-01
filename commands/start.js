@@ -1,6 +1,6 @@
-const db = require('../utils/database');
+import db from '../utils/database.js';
 
-module.exports = async (ctx) => {
+export default async (ctx) => {
     try{
         const telegramId = ctx.from.id;
         let user = await db.getUser(telegramId);
