@@ -21,14 +21,7 @@ export  async function getOpenAIResponse(prompt){
 export  async function getHistoryResponse(history){
     try{
         const messages = [
-            {
-                role: "system", 
-                content: "based on the chat history, summarize the current message into a standalone message"
-            },
-            {
-                role: "assistant", 
-                content: "You are a professional AI",
-            }
+            { role: "assistant", content: "You are a helpful AI",}
         ]
         messages.push(...history)
         const completion = await openai.chat.completions.create({

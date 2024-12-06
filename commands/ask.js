@@ -3,20 +3,16 @@ import db from '../utils/database.js';
 
 export default async (ctx) => {
     try {
-
-        const history = await db.getUserHistory(ctx.from.id);
-        history.push({
-            role: "user", 
-            content: ctx.message.text,
-        })
+        const userId = ctx.from.id;
+        const history = await db.getUserHistory(userId);
+        history.push({ role: "user", content: ctx.message.text,})
 
         await ctx.reply('⏳ Подождите, я обрабатываю ваш запрос...');
 
         const aiResponse = await getHistoryResponse(history);
-        history.push({
-            role: "assistant",
-            content: aiResponse
-        })
+        history.push({ role: "assistant", content: aiResponse})
+
+        await db.updateUserHistory(userId, history);
 
         await ctx.editMessageText(aiResponse, {
             message_id: parseInt(ctx.message.message_id)+1,

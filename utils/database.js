@@ -57,13 +57,15 @@ class Database {
             } else{
                 await this.users.updateOne(
                     {id: telegramId},
-                    { $set: { chatHistory: [] } }
+                    { $set: { 
+                        chatHistory: [] 
+                    } }
                 )
                 return [];
             }
             
         }catch(e){
-            console.erro(`An error occured while getting user: ${telegramId} prompt history. Error: `, e)
+            console.error(`An error occured while getting user: ${telegramId} prompt history. Error: `, e)
         }
     }
 
@@ -71,17 +73,17 @@ class Database {
         try{
             await this.users.updateOne(
                 {
-                    "id": telegramId
+                    id: telegramId
                 },
                 { $set: {
-                    "chatHistory": updatedHistory
+                    chatHistory: updatedHistory
                 }}
             )
 
-            console.log(`User: ${user.id} history was successfully updated`);
+            console.log(`User: ${telegramId} history was successfully updated`);
             return true;
         }catch(e){
-            console.erro(`An error occured while pushing message ${message} to user: ${telegramId} prompt history. Error: `, e)
+            console.error(`An error occured while updating user: ${telegramId} prompt history. Error: `, e)
         }
     }
 }
