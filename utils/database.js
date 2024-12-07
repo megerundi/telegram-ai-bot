@@ -50,8 +50,8 @@ class Database {
     async getUserHistory(telegramId){
         try{
             const user = await this.users.findOne({id: telegramId});
-            console.log(user)
-            if(user.chatHistory){
+
+            if(Object.hasOwn(user, 'chatHistory')){
                 const chatHistory = user.chatHistory;
                 return chatHistory;
             } else{

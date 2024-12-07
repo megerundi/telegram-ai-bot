@@ -18,7 +18,7 @@ export  async function getOpenAIResponse(prompt){
     }
 }
 
-export  async function getHistoryResponse(history){
+export async function getHistoryResponse(history){
     try{
         const messages = [
             { role: "assistant", content: "You are a helpful AI",}
