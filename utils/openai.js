@@ -37,7 +37,7 @@ export async function streamChatGPT(ctx, history) {
       await ctx.sendChatAction('typing');
   
       const response = await openai.chat.completions.create({
-        model: 'o1', 
+        model: 'gpt-o1', 
         messages: [...history],
         stream: true,
       });

@@ -19,6 +19,7 @@ announceScene.on(message('text'), async ctx =>{
         const users = ['5626880155', '424670238'];
         
         users.forEach( user => ctx.telegram.sendMessage(user, announceText));
+        ctx.reply(':)', Markup.removeKeyboard());
     } catch(e){
         ctx.reply(`Возникла ошибка: ${e}`, Markup.removeKeyboard());
     }

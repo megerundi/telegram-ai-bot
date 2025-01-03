@@ -67,15 +67,16 @@ class Database {
                 const chatHistory = user.chatHistory;
                 return chatHistory;
             } else{
+                const newHistory = [
+                    { role: "assistant", content: "You are a helpful AI",}
+                ] 
                 await this.users.updateOne(
                     {id: telegramId},
                     { $set: { 
-                        chatHistory: [
-                            { role: "assistant", content: "You are a helpful AI",}
-                        ] 
+                        chatHistory: newHistory
                     } }
                 )
-                return [];
+                return newHistory;
             }
             
         }catch(e){
