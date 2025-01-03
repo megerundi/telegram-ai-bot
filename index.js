@@ -10,11 +10,13 @@ import commandsCommand from './commands/commands.js';
 import adminCommand from './commands/admin.js';
 
 import adminScene from './scenes/adminScene.js';
+import announceScene from './scenes/announceScene.js'
+
 (async () => {
    await db.connect(); 
 })();
 const bot = new Telegraf(process.env.TELEGRAM_API_TOKEN, {parse_mode: 'HTML'});
-const stage = new Scenes.Stage([adminScene]);
+const stage = new Scenes.Stage([adminScene, announceScene]);
 
 bot.use(session());
 bot.use(stage.middleware());

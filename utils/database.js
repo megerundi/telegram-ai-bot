@@ -38,6 +38,18 @@ class Database {
         }
     }
 
+    async getUsersId(){
+        try{
+            const documents = await this.users.find({}, { projection: { id: 1, _id: 0 } }).toArray();
+
+            const idList = documents.map((doc) => doc.id);
+
+            return idList;
+        }catch(e){
+            console.error(`An error occured while getting users id's`, e);
+        }
+    }
+
     async addUser(user){
         try{
             await this.users.insertOne(user);
@@ -58,7 +70,9 @@ class Database {
                 await this.users.updateOne(
                     {id: telegramId},
                     { $set: { 
-                        chatHistory: [] 
+                        chatHistory: [
+                            { role: "assistant", content: "You are a helpful AI",}
+                        ] 
                     } }
                 )
                 return [];

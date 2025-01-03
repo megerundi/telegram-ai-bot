@@ -37,7 +37,7 @@ export async function streamChatGPT(ctx, history) {
       await ctx.sendChatAction('typing');
   
       const response = await openai.chat.completions.create({
-        model: 'gpt-o1', 
+        model: 'o1', 
         messages: [...history],
         stream: true,
       });
@@ -103,7 +103,7 @@ export async function streamChatGPT(ctx, history) {
   
     } catch (err) {
       console.error('streamChatGPT error:', err);
-      await ctx.reply(`Произошла ошибка при запросе к ChatGPT: ${err.message}`);
+      await ctx.telegram.sendMessage(process.env.ADMIN_ID, `Произошла ошибка при запросе к ChatGPT: ${err.message}`);
       // Если произошла ошибка, возвращаем пустую строку или 
       // можно выбросить ошибку повторно 
       return '';
