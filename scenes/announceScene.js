@@ -18,7 +18,7 @@ announceScene.on(message('text'), async ctx =>{
         const announceText = ctx.message.text;
         if(announceText == 'Назад') ctx.scene.leave();
 
-        const users = db.getUsersId();
+        const users = await db.getUsersId();
         
         users.forEach( user => ctx.telegram.sendMessage(user, announceText));
         ctx.reply(':)', Markup.removeKeyboard());
