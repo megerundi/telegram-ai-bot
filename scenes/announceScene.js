@@ -16,14 +16,17 @@ announceScene.leave(ctx => {
 announceScene.on(message('text'), async ctx =>{
     try{
         const announceText = ctx.message.text;
-        if(announceText == 'Назад') ctx.scene.leave();
+        if(announceText == 'Назад') await ctx.scene.leave();
 
         const users = await db.getUsersId();
         
         users.forEach( user => ctx.telegram.sendMessage(user, announceText));
         ctx.reply(':)', Markup.removeKeyboard());
+        
+        await ctx.scene.leave();
     } catch(e){
         ctx.reply(`Возникла ошибка: ${e}`, Markup.removeKeyboard());
+        await ctx.scene.leave();
     }
     
 })
