@@ -1,4 +1,4 @@
-import { getUser, updateUserSubscription} from "../services/userService";
+import { updateUserSubscription} from "../services/userService.js";
 
 export default async (ctx) =>{
     const telegramId = ctx.from.id;

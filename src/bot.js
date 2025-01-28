@@ -4,7 +4,7 @@ import { message } from 'telegraf/filters';
 import startCommand from './commands/start.js';
 import promptCommand from './commands/prompt.js';
 import adminCommand from './commands/admin.js';
-import actvatePremium from './commands/actvatePremium.js';
+import activatePremium from './commands/activatePremium.js';
 
 import adminScene from './scenes/adminScene.js';
 import announceScene from './scenes/announceScene.js'
@@ -16,7 +16,7 @@ const stage = new Scenes.Stage([adminScene, announceScene, imageScene]);
 
 bot.use(session());
 bot.use(stage.middleware());
-bot.setMyCommands([
+bot.telegram.setMyCommands([
    { command: "start", description: "Запустить бота" },
    { command: "help", description: "Получить справку по боту" },
    { command: "prompt", description: "Включить режим генерации текста" },
@@ -27,7 +27,7 @@ bot.setMyCommands([
 bot.start(startCommand);
 bot.help(ctx => ctx.reply('Здесь должна быть справка'));
 bot.command('admin', adminCommand);
-bot.command('getPremiumActiveBitch!', actvatePremium);
+bot.command('getPremiumActiveBitch!', activatePremium);
 bot.command('prompt', ctx => ctx.reply('Напишите ваш запрос'));
 bot.command('image', ctx => ctx.scene.enter('image'));
 
