@@ -6,7 +6,7 @@ import { getDB } from '../config/db.js';
 export async function getUser(telegramId){
     try {
        const db = getDB();
-       const user = await db.collection('').findOne({telegramId});
+       const user = await db.collection('users').findOne({telegramId});
        return user; //или null, если пользователь не найден
     } catch(error) {
         console.error(`Error in getUser(${telegramId}):`, error);
@@ -41,10 +41,13 @@ export async function getUsersId() {
 export async function addUser(userObj) {
     try {
         const db = getDB();
+        const logInfo = `New user with telegramId: ${userObj.telegramId} has been added successfully`;
         await db.collection('users').insertOne(userObj);
-        console.log(`New user with telegramId: ${userObj.telegramId} has been added successfully`);
+        logger('app', logInfo);
+        console.log(logInfo);
     } catch (error) {
-        console.error(`Error in addUser(${userObj.telegramId}):`, error);
+        logger('error', `Error in addUser(${userObj.telegramId}):${error}`);
+        console.error(`Error in addUser(${userObj.telegramId}):${error}`);
         throw error;
     }
 }

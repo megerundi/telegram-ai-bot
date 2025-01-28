@@ -10,7 +10,7 @@ export default async (ctx) => {
       const firstName = ctx.from.first_name || "";
       const userName = ctx.from.username || "";
       
-      const newUser = createUserModel(сtx.from);
+      const newUser = createUserModel(ctx.from);
 
       await addUser(newUser);
 
@@ -22,6 +22,6 @@ export default async (ctx) => {
     }
   } catch (error) {
     console.error("Error in /start command:", error);
-    await ctx.reply("Произошла ошибка при выполнении /start. Попробуйте позже.");
+    await ctx.reply("Произошла ошибка при выполнении. Попробуйте позже.");
   }
 }

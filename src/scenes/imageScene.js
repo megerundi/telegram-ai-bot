@@ -7,6 +7,7 @@ import adminCommand from '../commands/admin.js';
 const imageScene = new Scenes.BaseScene('image');
 
 imageScene.enter(ctx => ctx.reply('Введите описание картинки. Пример: рыжий кот в космосе'));
+imageScene.leave(ctx => ctx.reply('Напишите ваш запрос'));
 
 imageScene.start(startCommand);
 imageScene.help(ctx => ctx.reply('Здесь должна быть справка'));
