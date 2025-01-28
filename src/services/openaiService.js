@@ -81,12 +81,12 @@ export async function streamChatGPT(ctx, history) {
 }
   
 async function editMessageSafe(ctx, messageId, text) {
-  if (!text) return;
+  if (!text) return
   try {
     await ctx.telegram.editMessageText(ctx.chat.id, messageId, undefined, text);
   } catch (err) {
     if (err?.description?.includes('message is not modified')) {
-      return;
+      return
     }
     console.warn('editMessageSafe error:', err);
     await ctx.reply(text);

@@ -4,8 +4,9 @@ export function createUserModel(user){
         firstName: user.first_name,
         username: user.username,
         messagesHistory: [],
-        subscriptionActive: false,
+        isSubscribed: false,
         subscriptionEndDate: null,
+        trialPrompts: 5,
         createdAt: new Date()
     }
 }

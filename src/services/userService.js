@@ -96,3 +96,77 @@ export async function updateUserHistory(telegramId, updatedHistory) {
         throw error;
     }
 }
+
+function isSubscriptionActive(user) {
+    if (!user || !user.isSubscribed) return false;
+    if (!user.subscriptionEndDate) return false;
+    return user.subscriptionEndDate > new Date();
+  }
+  
+  /**
+   * Проверяем статус подписки и возвращаем, сколько пробных запросов осталось.
+   * @param {string|number} telegramId
+   * @returns {Object} { isActive: boolean, trialPrompts: number }
+   */
+export async function getSubscriptionStatus(telegramId) {
+    try {
+        const db = getDB();
+        const user = await db.collection('users').findOne({ telegramId });
+
+        if (!user) {
+            return {
+                isActive: false,
+                trialPrompts: 0
+            };
+        }
+
+        const subscription = isSubscriptionActive(user);
+        const trialLeft = subscription ? 0 : (user.trialPrompts || 0);
+
+        return {
+            isActive: subscription,
+            trialPrompts: trialLeft
+        };
+    } catch (error){
+        logger('error', `Error in getSubscriptionStatus(${telegramId}): ${error}` )
+        console.error(`Error in getSubscriptionStatus(${telegramId}):`, error);
+        throw error;
+    }
+}
+
+export async function updateUserSubscription(telegramId, isSubscribed, subscriptionEndDate) {
+    try {
+        const db = getDB();
+        await db.collection('users').updateOne(
+            { telegramId },
+            { $set: {
+                        isSubscribed,
+                        subscriptionEndDate: subscriptionEndDate
+                    }
+            });
+        console.log(`User ${telegramId} UserSubscription was successfully updated`);
+        return true;
+    } catch (error) {
+        logger('error', `Error in updateUserSubscription(${telegramId}): ${error}` )
+        console.error(`Error in updateUserSubscription(${telegramId}):`, error);
+        throw error;
+    }
+}
+
+export async function updateTrialPrompts(telegramId, trialPrompts) {
+    try {
+        const db = getDB();
+        await db.collection('users').updateOne(
+            { telegramId },
+            { $set: {
+                        trialPrompts
+                    }
+            });
+        console.log(`User ${telegramId} trialPrompts was successfully updated`);
+        return true;
+    } catch (error) {
+        logger('error', `Error in updateTrialPrompts(${telegramId}): ${error}` )
+        console.error(`Error in updateTrialPrompts(${telegramId}):`, error);
+        throw error;
+    }
+}

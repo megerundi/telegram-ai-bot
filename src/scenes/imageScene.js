@@ -16,7 +16,7 @@ imageScene.command('admin', adminCommand);
 
 imageScene.on(message('text'), ctx => {
    //CATCHING NOT EXISTING COMMANDS
-   if (ctx.message.text[0] === '/') return;
+   if (ctx.message.text[0] === '/') return
 
    imageCommand(ctx);
 });
