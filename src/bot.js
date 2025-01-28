@@ -1,5 +1,7 @@
 import { Scenes, session, Telegraf } from 'telegraf';
-import { message } from 'telegraf/filters'; 
+import { message } from 'telegraf/filters';
+import dotenv  from 'dotenv';
+dotenv.config();
 
 import startCommand from './commands/start.js';
 import promptCommand from './commands/prompt.js';

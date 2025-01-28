@@ -34,13 +34,13 @@ export default async (ctx) => {
     
         let waitingMessage = await ctx.reply("Это может занять пару секунд...");
         const images = await generateImage(prompt);
-        await ctx.deleteMessage(waitingMessage.message_id);
+
         if (images.length > 0) {
             await ctx.replyWithPhoto(images[0]);
         } else {
             ctx.reply("Не удалось получить изображение :(");
         }
-
+        await ctx.deleteMessage(waitingMessage.message_id);
         if (!isActive && trialPrompts > 0) {
             const updatedPrompts = trialPrompts - 1;
             await updateTrialPrompts(telegramId, updatedPrompts);
