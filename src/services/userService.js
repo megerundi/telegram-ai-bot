@@ -1,4 +1,5 @@
 import { getDB } from '../config/db.js';
+import { logger } from '../utils/logger.js';
 
 /**
  * Получить всех пользователей
