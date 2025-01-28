@@ -6,7 +6,7 @@ dotenv.config();
 
 async function start(){
     try {
-        // await connectToDB();
+        await connectToDB();
         
         bot.launch();
         logger('app', 'Bot is running...');
