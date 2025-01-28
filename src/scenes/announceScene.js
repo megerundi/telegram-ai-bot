@@ -1,6 +1,6 @@
 import { Scenes, Markup} from 'telegraf';
 import { message } from 'telegraf/filters';
-import db from '../utils/database.js';
+import { getUsersId } from '../services/userService.js';
 
 const announceScene = new Scenes.BaseScene('announce');
 
@@ -18,7 +18,7 @@ announceScene.on(message('text'), async ctx =>{
         const announceText = ctx.message.text;
         if(announceText == 'Назад') await ctx.scene.leave();
 
-        const users = await db.getUsersId();
+        const users = await getUsersId();
         
         users.forEach( user => ctx.telegram.sendMessage(user, announceText));
         ctx.reply(':)', Markup.removeKeyboard());

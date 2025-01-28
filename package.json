@@ -2,8 +2,9 @@
   "name": "telegram-ai-bot",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "nodemon index.js",
+    "test": "nodemon src/index.js",
     "db": "nodemon ./utils/db.js"
   },
   "keywords": [],
@@ -13,9 +14,8 @@
   "dependencies": {
     "dotenv": "^16.4.5",
     "mongodb": "4.0",
-    "nodemon": "^3.1.7",
+    "nodemon": "^3.1.9",
     "openai": "^4.71.1",
     "telegraf": "^4.16.3"
-  },
-  "type": "module"
+  }
 }

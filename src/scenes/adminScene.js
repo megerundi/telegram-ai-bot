@@ -3,18 +3,17 @@ import { message } from 'telegraf/filters';
 import testCommand from '../commands/test.js';
 const adminScene = new Scenes.BaseScene('admin');
 
-adminScene.enter(ctx => ctx.reply('Йоу, чё как?', 
+adminScene.enter(ctx => ctx.reply('Админ Панель', 
     Markup.keyboard(["/announce", "/exit"]).resize())
 )
-adminScene.leave(ctx => ctx.reply('Рад служить!', 
+adminScene.leave(ctx => ctx.reply('Выход', 
     Markup.removeKeyboard())
 );
 adminScene.command('announce', ctx => {
-    ctx.reply('its work');
     ctx.scene.enter('announce');
 });
-
 adminScene.command('test', testCommand);
+
 adminScene.command('exit', ctx => {
     ctx.scene.leave()
 });
