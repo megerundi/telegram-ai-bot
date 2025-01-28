@@ -1,7 +1,7 @@
 import bot from "./bot.js";
 import { connectToDB } from "./config/db.js";
 import { logger } from "./utils/logger.js"
-import dotenv  from 'dotenv';
+import dotenv from 'dotenv';
 dotenv.config();
 
 async function start(){

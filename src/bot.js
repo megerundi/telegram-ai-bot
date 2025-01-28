@@ -29,7 +29,7 @@ bot.telegram.setMyCommands([
 bot.start(startCommand);
 bot.help(ctx => ctx.reply('Здесь должна быть справка'));
 bot.command('admin', adminCommand);
-bot.command('getPremiumActiveBitch!', activatePremium);
+bot.command('getPremiumActiveBitch', activatePremium);
 bot.command('prompt', ctx => ctx.reply('Напишите ваш запрос'));
 bot.command('image', ctx => ctx.scene.enter('image'));
 
