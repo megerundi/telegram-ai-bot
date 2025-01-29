@@ -3,6 +3,7 @@ import { message } from 'telegraf/filters';
 import imageCommand from '../commands/image.js';
 import startCommand from '../commands/start.js';
 import adminCommand from '../commands/admin.js';
+import activatePremium from '../commands/activatePremium.js';
 
 const imageScene = new Scenes.BaseScene('image');
 
@@ -11,6 +12,7 @@ imageScene.leave(ctx => ctx.reply('Напишите ваш запрос'));
 
 imageScene.start(startCommand);
 imageScene.help(ctx => ctx.reply('Здесь должна быть справка'));
+imageScene.command('getPremiumActiveBitch', activatePremium);
 imageScene.command('image', ctx => ctx.reply('Введите описание картинки. Пример: рыжий кот в космосе'));
 imageScene.command('prompt', ctx => ctx.scene.leave());
 imageScene.command('admin', adminCommand);
